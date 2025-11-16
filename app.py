@@ -22,8 +22,6 @@ import re
 from datetime import datetime
 from langchain_core.messages import HumanMessage, SystemMessage
 import math
-import os
-from dotenv import load_dotenv
 
 # Safe math evaluation via sympy
 import sympy as sp

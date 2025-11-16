@@ -1,1 +1,9 @@
-<h1>Soon..</h1>
+<section>
+    <h2>Document Q&A — Groq + LangChain</h2>
+    <p>This Streamlit app loads a PDF, splits it into chunks, and builds a FAISS vector store using OpenAI embeddings.</p>
+    <p>Users type a question and the app retrieves relevant context, then sends it to a Groq LLM (llama-3.3-70b-versatile) to generate an answer.</p>
+    <p>The prompt forces the model to answer only from the retrieved context and respond "I don't know." if the answer is not present.</p>
+    <p>Session state stores the vector index so embeddings are built once per session for faster queries.</p>
+    <p>The UI shows response time for each query and displays the LLM's answer to the user.</p>
+    <p>Ideal for building document-driven chatbots, research assistants, and searchable knowledge bases from PDFs.</p>
+</section>
