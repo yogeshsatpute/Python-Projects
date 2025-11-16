@@ -1,6 +1,7 @@
 name: Copilot Code Review
 
 on:
+  workflow_dispatch:   # <-- Manual trigger
   pull_request:
     branches:
       - main
@@ -15,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: GitHub Copilot Code Review
