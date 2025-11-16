@@ -1,7 +1,7 @@
 name: Copilot Code Review
 
 on:
-  workflow_dispatch:   # <-- Manual trigger
+  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -19,8 +19,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: GitHub Copilot Code Review
-        uses: github/copilot-actions/review@v1
+      - name: Run Copilot Review
+        uses: github/copilot-review-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          comment-summary: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          comment_summary: true
