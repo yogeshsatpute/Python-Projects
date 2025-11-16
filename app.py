@@ -61,7 +61,6 @@ class Conversation:
 # ---------------------------
 # Utility functions
 # ---------------------------
-
 def now_iso():
     return datetime.utcnow().isoformat()
 
