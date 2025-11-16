@@ -1,26 +1,35 @@
-name: Copilot Code Review
+name: Copilot Commit Review
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-      - master
-
-permissions:
-  contents: read
-  pull-requests: write
+    inputs:
+      commit_id:
+        description: "Enter Commit ID"
+        required: true
 
 jobs:
-  copilot-review:
+  review:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v4
-
-      - name: Run Copilot Review
-        uses: github/copilot-review-action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          comment_summary: true
+          fetch-depth: 0
+
+      - name: Identify commit changes
+        id: diff
+        run: |
+          echo "commit_sha=${{ github.event.inputs.commit_id }}" >> $GITHUB_OUTPUT
+
+      - name: Get diff
+        run: |
+          git diff ${{ github.event.inputs.commit_id }}~1 ${{ github.event.inputs.commit_id }} > diff.txt
+          echo "Diff extracted."
+
+      - name: Run Copilot review
+        uses: actions/copilot/review@v1
+        with:
+          diff: diff.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
